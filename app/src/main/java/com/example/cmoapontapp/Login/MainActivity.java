@@ -33,16 +33,29 @@ public class MainActivity extends AppCompatActivity {
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         //*******************************************************************************************
-        loginViewModel.emailPasswordComplete.observe(this, new Observer<Boolean>() {
+        loginViewModel.liveData.observe(this, new Observer<LoginViewModel.ResultType>() {
             @Override
-            public void onChanged(Boolean isSuccess) {
-                if (!isSuccess) {
+            public void onChanged(LoginViewModel.ResultType resultType) {
 
-                    Toast.makeText(MainActivity.this, "Sign in problem", Toast.LENGTH_LONG)
-                            .show();
-
+                switch (resultType) {
+                    case SUCCESS:
+                        startActivity(new Intent(MainActivity.this, AccountActivity.class));
+                        finish();
+                        break;
+                    case CHECKEMAIL:
+                        Toast.makeText(MainActivity.this, "Email Obrigatório!", Toast.LENGTH_LONG)
+                                .show();
+                        break;
+                    case CHECKPASS:
+                        Toast.makeText(MainActivity.this, "Password Obrigatória", Toast.LENGTH_LONG)
+                                .show();
+                        break;
+                    case CHECKBOTH:
+                        Toast.makeText(MainActivity.this, "Credênciais Necessárias!", Toast.LENGTH_LONG)
+                                .show();
                 }
             }
+
         });
         //*******************************************************************************************
         loginViewModel.currentUser.observe(this, new Observer<FirebaseUser>() {
@@ -83,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
     }
+
+
+
 
 
     private void startSignIn() {

@@ -4,6 +4,7 @@ import android.nfc.Tag;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.cmoapontapp.Login.LoginViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -16,32 +17,48 @@ import androidx.lifecycle.ViewModel;
 
 public class RegistViewModel extends ViewModel {
 
+    enum ResultTypeRegist {
+        SUCCESS, ERROR, CHECKBOTH, CHECKEMAIL, CHECKPASS , CHECKPASSCONFIRM,  CHECKNAME, COMPARE
+    }
+
     private String TAG = "RegistViewModel";
 
-    MutableLiveData<Boolean> registComplete = new MutableLiveData<>();
+    MutableLiveData<RegistViewModel.ResultTypeRegist> liveData = new MutableLiveData<>();
     private FirebaseAuth mAuth;
 
 
 
 
+    public void regist(String username, String password, String passwordConfirm, String email){
 
+        if (email.isEmpty() && password.isEmpty()&& username.isEmpty()) {
+            liveData.postValue(ResultTypeRegist.CHECKBOTH);
+        } else if (password.isEmpty()) {
+            liveData.postValue(ResultTypeRegist.CHECKPASS);
+        } else if (email.isEmpty()) {
+            liveData.postValue(ResultTypeRegist.CHECKEMAIL);
+        } else if (username.isEmpty()) {
+            liveData.postValue(ResultTypeRegist.CHECKNAME);
+        }else if(passwordConfirm.isEmpty()) {
+            liveData.postValue(ResultTypeRegist.CHECKPASSCONFIRM);
+        }else if(!passwordConfirm.equals(password)){
+            liveData.postValue(ResultTypeRegist.COMPARE);
+        }else{
 
-    public void regist(String username, String password, String email){
-
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "createUserWithEmail :success");
-                    FirebaseUser user = mAuth.getCurrentUser();
-                //    updateUI(user);
-                }else{
-                    Log.w(TAG, "createUserWithEmail :failure", task.getException());
-                 //  Toast.makeText(RegistViewModel.this, "Authentication failed.",Toast.LENGTH_LONG).show();
-                 //   updateUI(null);
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (!task.isSuccessful()) {
+                        liveData.postValue(ResultTypeRegist.ERROR);
+                    } else {
+                        liveData.postValue(ResultTypeRegist.SUCCESS);
+                    }
                 }
-            }
-        });
+            });
+
+
+        }
+
 
 
     }

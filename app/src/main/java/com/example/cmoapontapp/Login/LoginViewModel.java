@@ -13,8 +13,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class LoginViewModel extends ViewModel {
+    enum ResultType {
+        SUCCESS, ERROR, CHECKBOTH, CHECKEMAIL, CHECKPASS
+    }
 
-    MutableLiveData<Boolean> emailPasswordComplete = new MutableLiveData<>();
+    MutableLiveData<ResultType> liveData = new MutableLiveData<>();
     MutableLiveData<FirebaseUser> currentUser = new MutableLiveData<>();
 
     private FirebaseAuth mAuth;
@@ -43,14 +46,26 @@ public class LoginViewModel extends ViewModel {
 
     public void login(String email, String password) {
 
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        if (email.isEmpty() && password.isEmpty()) {
+            liveData.postValue(ResultType.CHECKBOTH);
+        } else if (password.isEmpty()) {
+            liveData.postValue(ResultType.CHECKPASS);
+        } else if (email.isEmpty()) {
+            liveData.postValue(ResultType.CHECKEMAIL);
+        } else {
 
-                emailPasswordComplete.postValue(task.isSuccessful());
-            }
-        });
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (!task.isSuccessful()) {
+                        liveData.postValue(ResultType.ERROR);
+                    } else {
+                        liveData.postValue(ResultType.SUCCESS);
+                    }
+                }
+            });
+
+        }
 
     }
-
 }

@@ -1,13 +1,17 @@
 package com.example.cmoapontapp.Regist;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.cmoapontapp.AccountActivity;
 import com.example.cmoapontapp.Login.LoginViewModel;
 import com.example.cmoapontapp.R;
 
@@ -28,6 +32,38 @@ public class RegistActivity extends AppCompatActivity {
 
         RegistViewModel = ViewModelProviders.of(this).get(RegistViewModel.class);
 
+        RegistViewModel.liveData.observe(this, new Observer<RegistViewModel.ResultTypeRegist>() {
+            @Override
+            public void onChanged(RegistViewModel.ResultTypeRegist resultTypeRegist) {
+
+                switch (resultTypeRegist) {
+                    case SUCCESS:
+                        startActivity(new Intent(RegistActivity.this, AccountActivity.class));
+                        finish();
+                        break;
+                    case CHECKNAME:
+                        Toast.makeText(RegistActivity.this, "Nome Obrigatório!", Toast.LENGTH_LONG)
+                                .show();
+                    case CHECKEMAIL:
+                        Toast.makeText(RegistActivity.this, "Email Obrigatório!", Toast.LENGTH_LONG)
+                                .show();
+                        break;
+                    case CHECKPASS:
+                        Toast.makeText(RegistActivity.this, "Password Obrigatória!", Toast.LENGTH_LONG)
+                                .show();
+                        break;
+                    case CHECKPASSCONFIRM:
+                        Toast.makeText(RegistActivity.this, "As Passwords Não Coincidem!", Toast.LENGTH_LONG)
+                                .show();
+                    case CHECKBOTH:
+                        Toast.makeText(RegistActivity.this, "Credênciais Necessárias!", Toast.LENGTH_LONG)
+                                .show();
+                }
+
+            }
+        });
+
+
         btnRegist= (Button) findViewById(R.id.btn_Regist);
         name= (EditText) findViewById(R.id.editName);
         email= (EditText) findViewById(R.id.editEmail);
@@ -43,7 +79,7 @@ public class RegistActivity extends AppCompatActivity {
         String passwordConfirmR = passwordConfirm.getText().toString();
         String nameR = name.getText().toString();
 
-        //RegistViewModel.regist(emailR,passwordR);
+        RegistViewModel.regist(emailR,passwordR,passwordConfirmR, nameR);
 
     }
 }
