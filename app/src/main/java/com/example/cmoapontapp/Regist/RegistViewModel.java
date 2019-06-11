@@ -21,17 +21,21 @@ public class RegistViewModel extends ViewModel {
         SUCCESS, ERROR, CHECKBOTH, CHECKEMAIL, CHECKPASS , CHECKPASSCONFIRM,  CHECKNAME, COMPARE
     }
 
-    private String TAG = "RegistViewModel";
-
-    MutableLiveData<RegistViewModel.ResultTypeRegist> liveData = new MutableLiveData<>();
+    //private String TAG = "RegistViewModel";
     private FirebaseAuth mAuth;
+    MutableLiveData<RegistViewModel.ResultTypeRegist> liveData = new MutableLiveData<>();
 
 
+    public RegistViewModel(){
+        mAuth = FirebaseAuth.getInstance();
 
+    }
 
     public void regist(String username, String password, String passwordConfirm, String email){
 
-        if (email.isEmpty() && password.isEmpty()&& username.isEmpty()) {
+
+
+    if (email.isEmpty() || password.isEmpty() || username.isEmpty() || password.isEmpty()) {
             liveData.postValue(ResultTypeRegist.CHECKBOTH);
         } else if (password.isEmpty()) {
             liveData.postValue(ResultTypeRegist.CHECKPASS);
@@ -50,6 +54,7 @@ public class RegistViewModel extends ViewModel {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (!task.isSuccessful()) {
                         liveData.postValue(ResultTypeRegist.ERROR);
+
                     } else {
                         liveData.postValue(ResultTypeRegist.SUCCESS);
                     }

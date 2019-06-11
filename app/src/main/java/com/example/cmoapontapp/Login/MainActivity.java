@@ -53,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
                     case CHECKBOTH:
                         Toast.makeText(MainActivity.this, "Credênciais Necessárias!", Toast.LENGTH_LONG)
                                 .show();
+                    case ERROR:
+                        Toast.makeText(MainActivity.this, "Combinação de Email/Password Errada!", Toast.LENGTH_LONG)
+                                .show();
+                        break;
                 }
             }
 
