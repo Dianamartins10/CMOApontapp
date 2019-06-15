@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cmoapontapp.AccountActivity;
+import com.example.cmoapontapp.Home.HomeActivity;
 import com.example.cmoapontapp.R;
 import com.example.cmoapontapp.Regist.RegistActivity;
 import com.google.firebase.auth.FirebaseUser;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         loginViewModel.currentUser.observe(this, new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser user) {
-                startActivity(new Intent(MainActivity.this, AccountActivity.class));
+                startActivity(new Intent(MainActivity.this, HomeActivity.class));
             }
         });
 

@@ -14,7 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Regist.RegistActivity"></activity>
+        <activity
+            android:name=".Home.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Regist.RegistActivity" />
         <activity android:name=".AccountActivity" />
         <activity android:name=".Login.MainActivity">
             <intent-filter>

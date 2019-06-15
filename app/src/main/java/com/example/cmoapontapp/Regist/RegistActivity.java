@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cmoapontapp.AccountActivity;
+import com.example.cmoapontapp.Home.HomeActivity;
 import com.example.cmoapontapp.Login.LoginViewModel;
 import com.example.cmoapontapp.R;
 
@@ -39,7 +40,7 @@ public class RegistActivity extends AppCompatActivity {
 
                 switch (resultTypeRegist) {
                     case SUCCESS:
-                        startActivity(new Intent(RegistActivity.this, AccountActivity.class));
+                        startActivity(new Intent(RegistActivity.this, HomeActivity.class));
                         finish();
                         break;
                     case CHECKNAME:
@@ -53,11 +54,21 @@ public class RegistActivity extends AppCompatActivity {
                         Toast.makeText(RegistActivity.this, "Password Obrigatória!", Toast.LENGTH_LONG)
                                 .show();
                         break;
+                    case CHECKPASSLENGT:
+                        Toast.makeText(RegistActivity.this, "A Password Deve Conter no Mínimo 6 Caracteres!", Toast.LENGTH_LONG)
+                                .show();
+                        break;
                     case CHECKPASSCONFIRM:
                         Toast.makeText(RegistActivity.this, "As Passwords Não Coincidem!", Toast.LENGTH_LONG)
                                 .show();
                     case CHECKBOTH:
                         Toast.makeText(RegistActivity.this, "Todos os campos são de preenchimento obrigatório!", Toast.LENGTH_LONG)
+                                .show();
+                    case VALIDEMAIL:
+                        Toast.makeText(RegistActivity.this, "Email Inválido", Toast.LENGTH_LONG)
+                                .show();
+                    case EXISTEMAIL:
+                        Toast.makeText(RegistActivity.this, "O Email que Inseriu Já se Encontra Registado! ", Toast.LENGTH_LONG)
                                 .show();
                 }
 
@@ -80,6 +91,7 @@ public class RegistActivity extends AppCompatActivity {
         });
 
     }
+
 
 
 
