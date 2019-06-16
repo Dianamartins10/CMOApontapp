@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (resultType) {
                     case SUCCESS:
-                        startActivity(new Intent(MainActivity.this, AccountActivity.class));
+                        startActivity(new Intent(MainActivity.this, HomeActivity.class));
                         finish();
                         break;
                     case CHECKEMAIL:
@@ -63,12 +63,12 @@ public class MainActivity extends AppCompatActivity {
 
         });
         //*******************************************************************************************
-        loginViewModel.currentUser.observe(this, new Observer<FirebaseUser>() {
+        /*loginViewModel.currentUser.observe(this, new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser user) {
                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
             }
-        });
+        });*/
 
         email = (EditText) findViewById(R.id.editemail);
         password = (EditText) findViewById(R.id.editpwd);
