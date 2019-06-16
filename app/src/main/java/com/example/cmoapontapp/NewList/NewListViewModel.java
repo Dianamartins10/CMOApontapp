@@ -6,9 +6,7 @@ import com.example.cmoapontapp.Models.List;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class NewListViewModel extends ViewModel {
 
