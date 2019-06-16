@@ -1,27 +1,19 @@
 package com.example.cmoapontapp.Models;
 
+import java.util.ArrayList;
+
 public class List {
 
-    int list_id;
-    int user_id;
+
+    String user_id;
     String listName;
-    String productName;
-    String productCategory;
+    ArrayList<String> products;
 
-    public int getList_id() {
-        return list_id;
-    }
 
-    public void setList_id(int list_id) {
-        this.list_id = list_id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
+    public List(String user_id, String listName, ArrayList<String> products) {
         this.user_id = user_id;
+        this.listName = listName;
+        this.products = products;
     }
 
     public String getListName() {
@@ -32,19 +24,4 @@ public class List {
         this.listName = listName;
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory;
-    }
 }

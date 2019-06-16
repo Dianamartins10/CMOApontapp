@@ -71,10 +71,8 @@ public class RegistActivity extends AppCompatActivity {
                         Toast.makeText(RegistActivity.this, "O Email que Inseriu Já se Encontra Registado! ", Toast.LENGTH_LONG)
                                 .show();
                 }
-
             }
         });
-
 
 
         btnRegist= (Button) findViewById(R.id.btn_Regist);
@@ -82,7 +80,6 @@ public class RegistActivity extends AppCompatActivity {
         email= (EditText) findViewById(R.id.editEmail);
         password= (EditText) findViewById(R.id.editPass);
         passwordConfirm= (EditText) findViewById(R.id.editPassConfirm);
-
         btnRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,17 +90,12 @@ public class RegistActivity extends AppCompatActivity {
     }
 
 
-
-
-
     private void startSignUp(){
         String emailR = email.getText().toString();
         String passwordR = password.getText().toString();
         String passwordConfirmR = passwordConfirm.getText().toString();
         String nameR = name.getText().toString();
-
         RegistViewModel.regist(nameR,passwordR,passwordConfirmR,emailR );
-
     }
 }
 

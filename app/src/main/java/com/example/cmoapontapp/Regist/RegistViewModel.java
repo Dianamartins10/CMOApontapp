@@ -1,23 +1,13 @@
 package com.example.cmoapontapp.Regist;
 
-import android.nfc.Tag;
-import android.print.PrintDocumentAdapter;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.example.cmoapontapp.Login.LoginViewModel;
 import com.example.cmoapontapp.Models.User;
-import com.google.android.gms.common.api.Api;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
