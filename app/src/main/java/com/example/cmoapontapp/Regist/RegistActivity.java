@@ -61,15 +61,19 @@ public class RegistActivity extends AppCompatActivity {
                     case CHECKPASSCONFIRM:
                         Toast.makeText(RegistActivity.this, "As Passwords Não Coincidem!", Toast.LENGTH_LONG)
                                 .show();
+                        break;
                     case CHECKBOTH:
                         Toast.makeText(RegistActivity.this, "Todos os campos são de preenchimento obrigatório!", Toast.LENGTH_LONG)
                                 .show();
+                        break;
                     case VALIDEMAIL:
                         Toast.makeText(RegistActivity.this, "Email Inválido", Toast.LENGTH_LONG)
                                 .show();
+                        break;
                     case EXISTEMAIL:
                         Toast.makeText(RegistActivity.this, "O Email que Inseriu Já se Encontra Registado! ", Toast.LENGTH_LONG)
                                 .show();
+                        break;
                 }
             }
         });

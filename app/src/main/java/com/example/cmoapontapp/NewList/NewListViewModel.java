@@ -38,6 +38,8 @@ public class NewListViewModel extends ViewModel {
 
             final ArrayList<String> products;
             products = new ArrayList<>();
+
+
             List list = new List(user_id, nameList, products);
 
             newList.set(list);

@@ -24,5 +24,7 @@
     <string name="menu_gallery">Criar Produto</string>
     <string name="menu_slideshow">Logout</string>
     <string name="action_settings"></string>
+    <string name="title_activity_new_product">Apontapp</string>
+    <string name="title_activity_products">Apontapp</string>
 
 </resources>
